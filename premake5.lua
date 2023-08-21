@@ -1,12 +1,12 @@
-project "ImGui"
+project "ImGUI"
 	kind "StaticLib"
 	language "C++"
 	systemversion "latest"
 	cppdialect "C++20"
-	staticruntime "off"
+	staticruntime "on"
 
-	targetdir ("../../bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("../../bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir ("../../bin/" .. outputdir .. "-%{prj.name}")
+	objdir ("../../bin-int/" .. outputdir .. "-%{prj.name}")
 
 	files
 	{
@@ -30,8 +30,13 @@ project "ImGui"
 	includedirs
 	{
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.imgui}"
+		"%{IncludeDir.ImGUI}"
 	}
+
+	filter "configurations:Logging"
+		runtime "Debug"
+		symbols "on"
+
 	filter "configurations:Debug"
 		runtime "Debug"
 		symbols "on"
