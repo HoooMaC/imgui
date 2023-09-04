@@ -13,6 +13,8 @@ project "ImGUI"
 		"imconfig.h",
 		"imgui.h",
 		"imgui.cpp",
+		"imgui_setup.h",
+		"imgui_setup.cpp",
 		"imgui_draw.cpp",
 		"imgui_internal.h",
 		"imgui_widgets.cpp",
