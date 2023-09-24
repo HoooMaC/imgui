@@ -9,4 +9,7 @@ namespace imgui {
 
     void BeginFrame();
     void EndFrame();
+
+    int ImFormatString(char* buf, size_t buf_size, const char* fmt, ...);
+
 }

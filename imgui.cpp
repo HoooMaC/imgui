@@ -1876,6 +1876,27 @@ const char* ImStrSkipBlank(const char* str)
 #if defined(_MSC_VER) && !defined(vsnprintf)
 #define vsnprintf _vsnprintf
 #endif
+namespace imgui {
+
+    int ImFormatString(char* buf, size_t buf_size, const char* fmt, ...)
+    {
+        va_list args;
+        va_start(args, fmt);
+#ifdef IMGUI_USE_STB_SPRINTF
+        int w = stbsp_vsnprintf(buf, (int)buf_size, fmt, args);
+#else
+        int w = vsnprintf(buf, buf_size, fmt, args);
+#endif
+        va_end(args);
+        if (buf == NULL)
+            return w;
+        if (w == -1 || w >= (int)buf_size)
+            w = (int)buf_size - 1;
+        buf[w] = 0;
+        return w;
+    }
+
+}
 
 int ImFormatString(char* buf, size_t buf_size, const char* fmt, ...)
 {
